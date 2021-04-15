@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask,request,render_template
 import tensorflow
 from tensorflow import keras
 m = tensorflow.keras.models.load_model('/Users/Sherjeel Ahmed/PIAIC/Quarter-2/Deep Learning/Height_Weight.h5')
@@ -7,13 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return'''
-    <h1>Regression Problem<h1>
-    <form action="/info" method="POST">
-    <input type=text name="height" placeholder="Enter Height">
-    <input type="submit" value="Send">
-    </form>
-    '''
+    return render_template("index.html")
 @app.route("/info", methods=["GET","POST"])
 def info():
     if request.method == "GET":
